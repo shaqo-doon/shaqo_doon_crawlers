@@ -257,7 +257,7 @@
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="link" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">link</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;a href=&quot;(.*?)&quot; class=&quot;u-primary-background-color &quot;&gt;</stringProp>
+            <stringProp name="RegexExtractor.regex">&lt;a href=&quot;(.*?)&quot; class=&quot;u-primary-background-color gradient&quot;&gt;</stringProp>
             <stringProp name="RegexExtractor.template">$1$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">-1</stringProp>
