@@ -1,3 +1,6 @@
 @echo off
 echo Enjoy shaqo doon
-for %%f in (*.jmx) do jmeter -n -t %%f
+git fetch
+git pull origin
+for %%f in (*.jmx) do jmeter -n -t %%f;
+del jmeter.log
