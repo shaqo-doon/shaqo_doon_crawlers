@@ -118,7 +118,7 @@
           </RegexExtractor>
           <hashTree/>
         </hashTree>
-        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Controller" enabled="true">
+        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Controller" enabled="false">
           <stringProp name="ForeachController.inputVal">title</stringProp>
           <stringProp name="ForeachController.returnVal">vid</stringProp>
           <boolProp name="ForeachController.useSeparator">true</boolProp>

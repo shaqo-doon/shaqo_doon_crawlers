@@ -110,7 +110,7 @@
           <boolProp name="displaySystemProperties">false</boolProp>
         </DebugSampler>
         <hashTree/>
-        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Controller" enabled="true">
+        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Controller" enabled="false">
           <stringProp name="ForeachController.inputVal">title</stringProp>
           <stringProp name="ForeachController.returnVal">job</stringProp>
           <boolProp name="ForeachController.useSeparator">true</boolProp>
