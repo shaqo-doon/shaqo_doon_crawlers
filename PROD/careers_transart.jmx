@@ -15,7 +15,7 @@
           </elementProp>
           <elementProp name="country" elementType="Argument">
             <stringProp name="Argument.name">country</stringProp>
-            <stringProp name="Argument.value">Romania</stringProp>
+            <stringProp name="Argument.value">România</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="city" elementType="Argument">

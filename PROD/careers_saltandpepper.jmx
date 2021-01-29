@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="careers_salt&amp;pepper" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
@@ -15,7 +15,7 @@
           </elementProp>
           <elementProp name="country" elementType="Argument">
             <stringProp name="Argument.name">country</stringProp>
-            <stringProp name="Argument.value">Romania</stringProp>
+            <stringProp name="Argument.value">România</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="city" elementType="Argument">
@@ -109,45 +109,6 @@
             <stringProp name="RegexExtractor.refname">link</stringProp>
             <stringProp name="RegexExtractor.regex">href=&quot;(.*?)&quot; data-icon=&quot;(.*?)&quot;&gt;Apply for this position&lt;\/a&gt;</stringProp>
             <stringProp name="RegexExtractor.template">https://saltandpepper.co$1$</stringProp>
-            <stringProp name="RegexExtractor.default"> </stringProp>
-            <stringProp name="RegexExtractor.match_number">-1</stringProp>
-          </RegexExtractor>
-          <hashTree/>
-        </hashTree>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
-          <boolProp name="displayJMeterProperties">false</boolProp>
-          <boolProp name="displayJMeterVariables">true</boolProp>
-          <boolProp name="displaySystemProperties">false</boolProp>
-        </DebugSampler>
-        <hashTree/>
-        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="jobs" enabled="false">
-          <boolProp name="WAITING">false</boolProp>
-          <boolProp name="SUCCESFULL">true</boolProp>
-          <stringProp name="RESPONSE_CODE">200</stringProp>
-          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
-          <stringProp name="REQUEST_DATA"></stringProp>
-          <stringProp name="RESPONSE_DATA">${jobs}</stringProp>
-          <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
-          <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
-          <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
-          <stringProp name="URL"></stringProp>
-          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
-        </kg.apc.jmeter.samplers.DummySampler>
-        <hashTree>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="link" enabled="true">
-            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-            <stringProp name="RegexExtractor.refname">link</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;span class=&quot;text-middle&quot;&gt;\s+&lt;a href=&quot;(.*?)&quot;&gt;(.*)&lt;\/a&gt;</stringProp>
-            <stringProp name="RegexExtractor.template">http://www.romstalgroup.com/$1$</stringProp>
-            <stringProp name="RegexExtractor.default"> </stringProp>
-            <stringProp name="RegexExtractor.match_number">-1</stringProp>
-          </RegexExtractor>
-          <hashTree/>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="title" enabled="true">
-            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-            <stringProp name="RegexExtractor.refname">title</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;span class=&quot;text-middle&quot;&gt;\s+&lt;a href=&quot;(.*?)&quot;&gt;(.*)&lt;\/a&gt;</stringProp>
-            <stringProp name="RegexExtractor.template">$2$</stringProp>
             <stringProp name="RegexExtractor.default"> </stringProp>
             <stringProp name="RegexExtractor.match_number">-1</stringProp>
           </RegexExtractor>
