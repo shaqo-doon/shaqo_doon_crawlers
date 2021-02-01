@@ -47,7 +47,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="action" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">engage</stringProp>
+                <stringProp name="Argument.value">delete</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">action</stringProp>
@@ -95,11 +95,11 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Title" enabled="true">
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="title" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">title</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;a class=&quot;sc-jqCOkK bbAcyi&quot; href=&quot;(.*?)&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;sc-fYxtnH ihRVsM col-12 col-md-4&quot;&gt;(.*?)&lt;\/div&gt;&lt;div class=&quot;sc-jnlKLf cetikw col-6 col-md-4&quot;&gt;Category&lt;\/div&gt;&lt;div class=&quot;sc-gGBfsJ drAyna col-6 col-md-4&quot;&gt;&lt;\/div&gt;&lt;div class=&quot;sc-jnlKLf cetikw col-6 col-md-4&quot;&gt;Location&lt;\/div&gt;&lt;div class=&quot;sc-gGBfsJ drAyna col-6 col-md-4&quot;&gt;(.*?)&lt;\/div&gt;&lt;\/div&gt;&lt;\/a&gt;</stringProp>
-            <stringProp name="RegexExtractor.template">$2$</stringProp>
+            <stringProp name="RegexExtractor.regex">&lt;div class=&quot;sc-fYxtnH ihRVsM col-12 col-md-4&quot;&gt;(.*?)&lt;\/div&gt;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">-1</stringProp>
           </RegexExtractor>
@@ -107,23 +107,14 @@
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="links" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">links</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;a class=&quot;sc-jqCOkK bbAcyi&quot; href=&quot;(.*?)&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;sc-fYxtnH ihRVsM col-12 col-md-4&quot;&gt;(.*?)&lt;\/div&gt;&lt;div class=&quot;sc-jnlKLf cetikw col-6 col-md-4&quot;&gt;Category&lt;\/div&gt;&lt;div class=&quot;sc-gGBfsJ drAyna col-6 col-md-4&quot;&gt;&lt;\/div&gt;&lt;div class=&quot;sc-jnlKLf cetikw col-6 col-md-4&quot;&gt;Location&lt;\/div&gt;&lt;div class=&quot;sc-gGBfsJ drAyna col-6 col-md-4&quot;&gt;(.*?)&lt;\/div&gt;&lt;\/div&gt;&lt;\/a&gt;</stringProp>
+            <stringProp name="RegexExtractor.regex">&lt;a class=&quot;sc-jqCOkK bbAcyi&quot; href=&quot;(.*?)&quot;&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;sc-fYxtnH ihRVsM col-12 col-md-4&quot;&gt;(.*?)&lt;\/div&gt;&lt;div class=</stringProp>
             <stringProp name="RegexExtractor.template">https://vivre.catsone.com$1$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">-1</stringProp>
           </RegexExtractor>
           <hashTree/>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="city" enabled="false">
-            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-            <stringProp name="RegexExtractor.refname">city</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;a class=&quot;sc-jqCOkK bbAcyi&quot; href=&quot;(.*?)&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;sc-fYxtnH ihRVsM col-12 col-md-4&quot;&gt;(.*?)&lt;\/div&gt;&lt;div class=&quot;sc-jnlKLf cetikw col-6 col-md-4&quot;&gt;Category&lt;\/div&gt;&lt;div class=&quot;sc-gGBfsJ drAyna col-6 col-md-4&quot;&gt;&lt;\/div&gt;&lt;div class=&quot;sc-jnlKLf cetikw col-6 col-md-4&quot;&gt;Location&lt;\/div&gt;&lt;div class=&quot;sc-gGBfsJ drAyna col-6 col-md-4&quot;&gt;(.*?)&lt;\/div&gt;&lt;\/div&gt;&lt;\/a&gt;</stringProp>
-            <stringProp name="RegexExtractor.template">$3$</stringProp>
-            <stringProp name="RegexExtractor.default"></stringProp>
-            <stringProp name="RegexExtractor.match_number">-1</stringProp>
-          </RegexExtractor>
-          <hashTree/>
         </hashTree>
-        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Controller" enabled="false">
+        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Controller" enabled="true">
           <stringProp name="ForeachController.inputVal">links</stringProp>
           <stringProp name="ForeachController.returnVal">link</stringProp>
           <boolProp name="ForeachController.useSeparator">true</boolProp>
@@ -176,6 +167,13 @@
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">country</stringProp>
+                </elementProp>
+                <elementProp name="action" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">insert</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">action</stringProp>
                 </elementProp>
               </collectionProp>
             </elementProp>

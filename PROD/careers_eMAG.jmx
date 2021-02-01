@@ -37,7 +37,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="action" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">engage</stringProp>
+                <stringProp name="Argument.value">delete</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">action</stringProp>
@@ -106,7 +106,7 @@
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="city" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">city</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;h4\sclass=&quot;oracletaleocwsv2-head-title&quot;&gt;&lt;a\shref=&quot;(.*?)&quot;&gt;(.*?)&lt;\/a&gt;&lt;\/h4&gt;\n&lt;div&gt;(.*?)&lt;\/div&gt;\n&lt;div&gt;(.*?)&lt;\/div&gt;</stringProp>
+            <stringProp name="RegexExtractor.regex">&lt;h4\sclass=&quot;oracletaleocwsv2-head-title&quot;&gt;&lt;a\shref=&quot;(.*?)&quot;&gt;(.*?)&lt;\/a&gt;&lt;\/h4&gt;\n&lt;div&gt;(.*?)&lt;\/div&gt;\n&lt;div&gt;(.*?)[ - |&lt;]</stringProp>
             <stringProp name="RegexExtractor.template">$4$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">-1</stringProp>
@@ -166,6 +166,13 @@
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">country</stringProp>
+                </elementProp>
+                <elementProp name="action" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">insert</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">action</stringProp>
                 </elementProp>
               </collectionProp>
             </elementProp>

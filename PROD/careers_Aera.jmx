@@ -37,7 +37,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="action" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">engage</stringProp>
+                <stringProp name="Argument.value">delete</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">action</stringProp>
@@ -85,6 +85,30 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="list" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">list</stringProp>
+            <stringProp name="RegexExtractor.regex">&lt;form class=&quot;_1Cw2A9Wsak&quot;&gt;([\s+\S+\n]*.?)TWITTER</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="list" enabled="true">
+          <boolProp name="WAITING">false</boolProp>
+          <boolProp name="SUCCESFULL">true</boolProp>
+          <stringProp name="RESPONSE_CODE">200</stringProp>
+          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+          <stringProp name="REQUEST_DATA"></stringProp>
+          <stringProp name="RESPONSE_DATA">${__strReplace(${list},Darmstadt Germany,Darmstadt\, Germany,)}</stringProp>
+          <stringProp name="RESPONSE_TIME">0</stringProp>
+          <stringProp name="LATENCY">0</stringProp>
+          <stringProp name="CONNECT">0</stringProp>
+          <stringProp name="URL"></stringProp>
+          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+        </kg.apc.jmeter.samplers.DummySampler>
+        <hashTree>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="title" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">title</stringProp>
@@ -115,7 +139,7 @@
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="city" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">city</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;a class=&quot;_3TOrPVVHfA&quot; href=&quot;https:\/\/jobs.lever.co\/(.*?)&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;div class=&quot;EW3BCwkCi_&quot;&gt;&lt;div class=&quot;_1lr1pa-nIN&quot;&gt;&lt;div&gt;&lt;h3 class=&quot;_2oCh_P982c&quot;&gt;(.*?)&lt;\/h3&gt;&lt;p class=&quot;_13gbvVn8Lj&quot;&gt;(.*?)&lt;!-- --&gt;, &lt;!-- --&gt;Full-time&lt;\/p&gt;&lt;\/div&gt;&lt;\/div&gt;&lt;div class=&quot;_1lr1pa-nIN&quot;&gt;&lt;p class=&quot;_1RSuWi9-4R&quot;&gt;(.*?), (.*?)&lt;\/p&gt;</stringProp>
+            <stringProp name="RegexExtractor.regex">&lt;a class=&quot;_3TOrPVVHfA&quot; href=&quot;https:\/\/jobs\.lever\.co\/(.*?)&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;div class=&quot;EW3BCwkCi_&quot;&gt;&lt;div class=&quot;_1lr1pa-nIN&quot;&gt;&lt;div&gt;&lt;h3 class=&quot;_2oCh_P982c&quot;&gt;(.*?)&lt;\/h3&gt;&lt;p class=&quot;_13gbvVn8Lj&quot;&gt;(.*?)&lt;!-- --&gt;, &lt;!-- --&gt;Full-time&lt;\/p&gt;&lt;\/div&gt;&lt;\/div&gt;&lt;div class=&quot;_1lr1pa-nIN&quot;&gt;&lt;p class=&quot;_1RSuWi9-4R&quot;&gt;(.*?), (.*?)&lt;\/p&gt;</stringProp>
             <stringProp name="RegexExtractor.template">$4$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">-1</stringProp>
@@ -175,6 +199,13 @@
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">link</stringProp>
+                </elementProp>
+                <elementProp name="action" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">insert</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">action</stringProp>
                 </elementProp>
               </collectionProp>
             </elementProp>

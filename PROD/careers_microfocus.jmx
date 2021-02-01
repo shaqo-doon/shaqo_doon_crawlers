@@ -49,7 +49,7 @@
               </elementProp>
               <elementProp name="action" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">engage</stringProp>
+                <stringProp name="Argument.value">delete</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">action</stringProp>
@@ -79,7 +79,7 @@
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">https://jobs.microfocus.com/global/en/search-results?keywords=romania</stringProp>
+          <stringProp name="HTTPSampler.path">https://jobs.microfocus.com/global/en/search-results</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -111,7 +111,16 @@
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="city" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">city</stringProp>
-            <stringProp name="RegexExtractor.regex">&quot;country&quot;:&quot;Romania&quot;,&quot;cityState&quot;:&quot;(.*?),(.*?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.regex">\{&quot;country&quot;:&quot;(.*?)&quot;,&quot;cityState&quot;:&quot;(.*?)&quot;,&quot;subCategory&quot;:&quot;(.*?)&quot;,&quot;city&quot;:&quot;(.*?)&quot;,&quot;ml_skills</stringProp>
+            <stringProp name="RegexExtractor.template">$4$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">-1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="country" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">country</stringProp>
+            <stringProp name="RegexExtractor.regex">\{&quot;country&quot;:&quot;(.*?)&quot;,&quot;cityState&quot;:&quot;(.*?)&quot;,&quot;subCategory&quot;:&quot;(.*?)&quot;,&quot;city&quot;:&quot;(.*?)&quot;,&quot;ml_skills</stringProp>
             <stringProp name="RegexExtractor.template">$1$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">-1</stringProp>
@@ -167,10 +176,17 @@
                 </elementProp>
                 <elementProp name="country" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${country}</stringProp>
+                  <stringProp name="Argument.value">${__V(country_${k},)}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">country</stringProp>
+                </elementProp>
+                <elementProp name="action" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">insert</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">action</stringProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
