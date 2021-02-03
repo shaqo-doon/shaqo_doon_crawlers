@@ -37,7 +37,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="action" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">engage</stringProp>
+                <stringProp name="Argument.value">delete</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">action</stringProp>
@@ -85,32 +85,23 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="title" enabled="true">
-            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-            <stringProp name="RegexExtractor.refname">title</stringProp>
-            <stringProp name="RegexExtractor.regex">&quot;title&quot;:&quot;(.*?)&quot;</stringProp>
-            <stringProp name="RegexExtractor.template">$1$</stringProp>
-            <stringProp name="RegexExtractor.default"> </stringProp>
-            <stringProp name="RegexExtractor.match_number">-1</stringProp>
-          </RegexExtractor>
+          <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="title" enabled="true">
+            <stringProp name="JMESExtractor.referenceName">title</stringProp>
+            <stringProp name="JMESExtractor.jmesPathExpr">jobs[*].title</stringProp>
+            <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
+          </JMESPathExtractor>
           <hashTree/>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="city" enabled="true">
-            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-            <stringProp name="RegexExtractor.refname">city</stringProp>
-            <stringProp name="RegexExtractor.regex">location&quot;:\{&quot;name&quot;:&quot;(.*?),</stringProp>
-            <stringProp name="RegexExtractor.template">$1$</stringProp>
-            <stringProp name="RegexExtractor.default"> </stringProp>
-            <stringProp name="RegexExtractor.match_number">-1</stringProp>
-          </RegexExtractor>
+          <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="location" enabled="true">
+            <stringProp name="JMESExtractor.referenceName">location</stringProp>
+            <stringProp name="JMESExtractor.jmesPathExpr">jobs[*].location.name</stringProp>
+            <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
+          </JMESPathExtractor>
           <hashTree/>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="country" enabled="true">
-            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-            <stringProp name="RegexExtractor.refname">country</stringProp>
-            <stringProp name="RegexExtractor.regex">location&quot;:\{&quot;name&quot;:&quot;(.*?)[,|&quot;](.*?)[\}|&quot;]</stringProp>
-            <stringProp name="RegexExtractor.template">$2$</stringProp>
-            <stringProp name="RegexExtractor.default"> </stringProp>
-            <stringProp name="RegexExtractor.match_number">-1</stringProp>
-          </RegexExtractor>
+          <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="link" enabled="true">
+            <stringProp name="JMESExtractor.referenceName">link</stringProp>
+            <stringProp name="JMESExtractor.jmesPathExpr">jobs[*].absolute_url</stringProp>
+            <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
+          </JMESPathExtractor>
           <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="link" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
@@ -171,61 +162,328 @@
             <boolProp name="CounterConfig.per_user">false</boolProp>
           </CounterConfig>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${k} --  add --  ${__V(title_${k},)}" enabled="true">
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="company" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${company}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">company</stringProp>
-                </elementProp>
-                <elementProp name="title" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${__V(title_${k},)}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">title</stringProp>
-                </elementProp>
-                <elementProp name="city" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${__V(city_${k},)}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">city</stringProp>
-                </elementProp>
-                <elementProp name="link" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${__V(link_${k},)}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">link</stringProp>
-                </elementProp>
-                <elementProp name="country" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${__V(country_${k},)}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">country</stringProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-            <stringProp name="HTTPSampler.domain">api.shaqodoon.ro</stringProp>
-            <stringProp name="HTTPSampler.port"></stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/addjobs/</stringProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-            <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          </HTTPSamplerProxy>
+          <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="location" enabled="true">
+            <boolProp name="WAITING">false</boolProp>
+            <boolProp name="SUCCESFULL">true</boolProp>
+            <stringProp name="RESPONSE_CODE">200</stringProp>
+            <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+            <stringProp name="REQUEST_DATA"></stringProp>
+            <stringProp name="RESPONSE_DATA">${__split(${__V(location_${k},)},town,)}</stringProp>
+            <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+            <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+            <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+            <stringProp name="URL"></stringProp>
+            <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+          </kg.apc.jmeter.samplers.DummySampler>
           <hashTree/>
+          <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+            <boolProp name="displayJMeterProperties">false</boolProp>
+            <boolProp name="displayJMeterVariables">true</boolProp>
+            <boolProp name="displaySystemProperties">false</boolProp>
+          </DebugSampler>
+          <hashTree/>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+            <stringProp name="IfController.condition">${town_n}==1</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+              <stringProp name="IfController.condition">&quot;${town_1}&quot;==&quot;Cluj-Napoca&quot;</stringProp>
+              <boolProp name="IfController.evaluateAll">false</boolProp>
+            </IfController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${k} --  add --  ${__V(title_${k},)}" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="company" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">${company}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">company</stringProp>
+                    </elementProp>
+                    <elementProp name="title" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">${__V(title_${k},)}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">title</stringProp>
+                    </elementProp>
+                    <elementProp name="city" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">${town_1}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">city</stringProp>
+                    </elementProp>
+                    <elementProp name="link" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">${__V(link_${k},)}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">link</stringProp>
+                    </elementProp>
+                    <elementProp name="country" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">Romania</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">country</stringProp>
+                    </elementProp>
+                    <elementProp name="action" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">insert</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">action</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">api.shaqodoon.ro</stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/addjobs/</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree/>
+            </hashTree>
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+              <stringProp name="IfController.condition">&quot;${town_1}&quot;==&quot;New York&quot;</stringProp>
+              <boolProp name="IfController.evaluateAll">false</boolProp>
+            </IfController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${k} --  add --  ${__V(title_${k},)}" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="company" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">${company}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">company</stringProp>
+                    </elementProp>
+                    <elementProp name="title" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">${__V(title_${k},)}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">title</stringProp>
+                    </elementProp>
+                    <elementProp name="city" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">${town_1}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">city</stringProp>
+                    </elementProp>
+                    <elementProp name="link" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">${__V(link_${k},)}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">link</stringProp>
+                    </elementProp>
+                    <elementProp name="country" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">United States</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">country</stringProp>
+                    </elementProp>
+                    <elementProp name="action" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">insert</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">action</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">api.shaqodoon.ro</stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/addjobs/</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree/>
+            </hashTree>
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+              <stringProp name="IfController.condition">(&quot;${town_1}&quot;!=&quot;Cluj-Napoca&quot;)&amp;&amp;(&quot;${town_1}&quot;!=&quot;New York&quot;)</stringProp>
+              <boolProp name="IfController.evaluateAll">false</boolProp>
+            </IfController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${k} --  add --  ${__V(title_${k},)}" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="company" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">${company}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">company</stringProp>
+                    </elementProp>
+                    <elementProp name="title" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">${__V(title_${k},)}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">title</stringProp>
+                    </elementProp>
+                    <elementProp name="city" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">${town_1}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">city</stringProp>
+                    </elementProp>
+                    <elementProp name="link" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">${__V(link_${k},)}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">link</stringProp>
+                    </elementProp>
+                    <elementProp name="country" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value"></stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">country</stringProp>
+                    </elementProp>
+                    <elementProp name="action" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">insert</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">action</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">api.shaqodoon.ro</stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/addjobs/</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+            <stringProp name="IfController.condition">${town_n}==2</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="${town_2}" enabled="true">
+              <boolProp name="WAITING">false</boolProp>
+              <boolProp name="SUCCESFULL">true</boolProp>
+              <stringProp name="RESPONSE_CODE">200</stringProp>
+              <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+              <stringProp name="REQUEST_DATA"></stringProp>
+              <stringProp name="RESPONSE_DATA">${town_2}</stringProp>
+              <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+              <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+              <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+              <stringProp name="URL"></stringProp>
+              <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+            </kg.apc.jmeter.samplers.DummySampler>
+            <hashTree>
+              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="country" enabled="true">
+                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                <stringProp name="RegexExtractor.refname">country</stringProp>
+                <stringProp name="RegexExtractor.regex"> (.*)</stringProp>
+                <stringProp name="RegexExtractor.template">$1$</stringProp>
+                <stringProp name="RegexExtractor.default"></stringProp>
+                <stringProp name="RegexExtractor.match_number">1</stringProp>
+              </RegexExtractor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${k} --  add --  ${__V(title_${k},)}" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="company" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${company}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">company</stringProp>
+                  </elementProp>
+                  <elementProp name="title" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${__V(title_${k},)}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">title</stringProp>
+                  </elementProp>
+                  <elementProp name="city" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${town_1}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">city</stringProp>
+                  </elementProp>
+                  <elementProp name="link" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${__V(link_${k},)}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">link</stringProp>
+                  </elementProp>
+                  <elementProp name="country" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${country}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">country</stringProp>
+                  </elementProp>
+                  <elementProp name="action" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">insert</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">action</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">api.shaqodoon.ro</stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/addjobs/</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree/>
+          </hashTree>
         </hashTree>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>

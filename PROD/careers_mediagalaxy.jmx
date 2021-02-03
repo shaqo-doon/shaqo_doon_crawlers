@@ -10,7 +10,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="company" elementType="Argument">
             <stringProp name="Argument.name">company</stringProp>
-            <stringProp name="Argument.value">MediaGalaxy</stringProp>
+            <stringProp name="Argument.value">Media Galaxy</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="country" elementType="Argument">
