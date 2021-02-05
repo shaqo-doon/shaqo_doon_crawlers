@@ -135,12 +135,12 @@
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">company</stringProp>
                 </elementProp>
-                <elementProp name="titlu" elementType="HTTPArgument">
+                <elementProp name="title" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">true</boolProp>
                   <stringProp name="Argument.value">${__V(titlu_${i},)}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">titlu</stringProp>
+                  <stringProp name="Argument.name">title</stringProp>
                 </elementProp>
                 <elementProp name="link" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
