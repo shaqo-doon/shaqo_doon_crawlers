@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="careers_lateral" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -177,20 +177,20 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="link" enabled="true">
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="title" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-            <stringProp name="RegexExtractor.refname">link</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;a href=&quot;\/careers\/(.*?)&quot; data-city=&quot;(.*?)&quot;&gt;(.*?)&lt;\/a&gt;</stringProp>
-            <stringProp name="RegexExtractor.template">https://www.lateral-inc.com/careers/$1$</stringProp>
+            <stringProp name="RegexExtractor.refname">title</stringProp>
+            <stringProp name="RegexExtractor.regex"> &lt;a href=&quot;javascript:;&quot; data-city=&quot;(.+?)&quot;&gt;(.+?)&lt;/a&gt;</stringProp>
+            <stringProp name="RegexExtractor.template">$2$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">-1</stringProp>
           </RegexExtractor>
           <hashTree/>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="title" enabled="true">
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="city" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-            <stringProp name="RegexExtractor.refname">title</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;a href=&quot;\/careers\/(.*?)&quot; data-city=&quot;(.*?)&quot;&gt;(.*?)&lt;\/a&gt;</stringProp>
-            <stringProp name="RegexExtractor.template">$3$</stringProp>
+            <stringProp name="RegexExtractor.refname">city</stringProp>
+            <stringProp name="RegexExtractor.regex"> &lt;a href=&quot;javascript:;&quot; data-city=&quot;(.+?)&quot;&gt;(.+?)&lt;/a&gt;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">-1</stringProp>
           </RegexExtractor>
@@ -231,14 +231,14 @@
                 </elementProp>
                 <elementProp name="city" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${city}</stringProp>
+                  <stringProp name="Argument.value">${__V(city_${k},)}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">city</stringProp>
                 </elementProp>
                 <elementProp name="link" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${__V(link_${k},)}</stringProp>
+                  <stringProp name="Argument.value">https://www.lateral-inc.com/careers.html</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">link</stringProp>
@@ -283,7 +283,7 @@
                   <stringProp name="Argument.value">[{&#xd;
         &quot;id&quot;:&quot;${__UUID}&quot;,&#xd;
         &quot;job_title&quot;:&quot;${__V(title_${k},)}&quot;,&#xd;
-        &quot;job_link&quot;:&quot;${__V(link_${k},)}&quot;,&#xd;
+        &quot;job_link&quot;:&quot;https://www.lateral-inc.com/careers.html&quot;,&#xd;
         &quot;company&quot;:&quot;${company}&quot;,&#xd;
         &quot;country&quot;:&quot;${country}&quot;,&#xd;
         &quot;city&quot;:&quot;${city}&quot;&#xd;
