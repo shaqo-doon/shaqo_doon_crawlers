@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan Omniconvert" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -172,46 +172,20 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="list" enabled="true">
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="link" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-            <stringProp name="RegexExtractor.refname">list</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;article class=&quot;elementor-post elementor-grid-item post-26750 jobs type-jobs status-publish hentry&quot;&gt;([\s\S\n]*.?)&lt;section class=&quot;elementor-section elementor-top-section elementor-element elementor-element-2a19ee41 elementor-section-boxed elementor-section-height-default elementor-section-height-default&quot; data-id=&quot;2a19ee41&quot; data-element_type=&quot;section&quot; data-settings=&quot;{&amp;quot;shape_divider_bottom&amp;quot;:&amp;quot;tilt&amp;quot;}&quot;&gt;</stringProp>
+            <stringProp name="RegexExtractor.refname">link</stringProp>
+            <stringProp name="RegexExtractor.regex">&lt;h3 class=&quot;elementor-post__title&quot;&gt;\s+&lt;a href=&quot;(.+?)&quot; &gt;\s+(.+?)\s+&lt;\/a&gt;\s+&lt;\/h3&gt;</stringProp>
             <stringProp name="RegexExtractor.template">$1$</stringProp>
-            <stringProp name="RegexExtractor.default"></stringProp>
-            <stringProp name="RegexExtractor.match_number">1</stringProp>
-          </RegexExtractor>
-          <hashTree/>
-        </hashTree>
-        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="list " enabled="true">
-          <boolProp name="WAITING">false</boolProp>
-          <boolProp name="SUCCESFULL">true</boolProp>
-          <stringProp name="RESPONSE_CODE">200</stringProp>
-          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
-          <stringProp name="REQUEST_DATA">list of jobs
-
-</stringProp>
-          <stringProp name="RESPONSE_DATA">${list}</stringProp>
-          <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
-          <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
-          <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
-          <stringProp name="URL"></stringProp>
-          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
-        </kg.apc.jmeter.samplers.DummySampler>
-        <hashTree>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="title" enabled="true">
-            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-            <stringProp name="RegexExtractor.refname">title</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;a href=&quot;(.*?)&quot;&gt;\s+(.*?)\s+&lt;\/a&gt;</stringProp>
-            <stringProp name="RegexExtractor.template">$2$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">-1</stringProp>
           </RegexExtractor>
           <hashTree/>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="link" enabled="true">
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="title" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-            <stringProp name="RegexExtractor.refname">link</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;a href=&quot;(.*?)&quot;&gt;</stringProp>
-            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.refname">title</stringProp>
+            <stringProp name="RegexExtractor.regex">&lt;h3 class=&quot;elementor-post__title&quot;&gt;\s+&lt;a href=&quot;(.+?)&quot; &gt;\s+(.+?)\s+&lt;\/a&gt;\s+&lt;\/h3&gt;</stringProp>
+            <stringProp name="RegexExtractor.template">$2$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">-1</stringProp>
           </RegexExtractor>

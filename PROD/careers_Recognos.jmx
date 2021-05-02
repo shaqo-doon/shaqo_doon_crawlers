@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="careers_recognos" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -175,7 +175,7 @@
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="titlu" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">titlu</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;a href=&quot;https:\/\/www.recognos.com\/(.*?)\/&quot;&gt;&lt;h2&gt;(.*?)&lt;\/h2&gt;&lt;\/a&gt;</stringProp>
+            <stringProp name="RegexExtractor.regex">&lt;div class=&quot;article-header&quot;&gt;\s+&lt;a href=&quot;(.+?)&quot;&gt;&lt;h2&gt;(.+?)&lt;\/h2&gt;&lt;\/a&gt;\s+&lt;span class=&quot;meta-top&quot;&gt;\s+&lt;span class=&quot;realigntitle&quot;&gt; - (.+?), (.+?)&lt;\/span&gt;\s+&lt;\/span&gt;\s+\n\s+&lt;\/div&gt;</stringProp>
             <stringProp name="RegexExtractor.template">$2$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">-1</stringProp>
@@ -184,10 +184,19 @@
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="link" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">link</stringProp>
-            <stringProp name="RegexExtractor.regex">&lt;a href=&quot;(.*?)\/&quot;&gt;&lt;h2&gt;(.*?)&lt;\/h2&gt;&lt;\/a&gt;</stringProp>
+            <stringProp name="RegexExtractor.regex">&lt;div class=&quot;article-header&quot;&gt;\s+&lt;a href=&quot;(.+?)&quot;&gt;&lt;h2&gt;(.+?)&lt;\/h2&gt;&lt;\/a&gt;\s+&lt;span class=&quot;meta-top&quot;&gt;\s+&lt;span class=&quot;realigntitle&quot;&gt; - (.+?), (.+?)&lt;\/span&gt;\s+&lt;\/span&gt;\s+\n\s+&lt;\/div&gt;</stringProp>
             <stringProp name="RegexExtractor.template">$1$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
             <stringProp name="RegexExtractor.match_number">-1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="city" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">city</stringProp>
+            <stringProp name="RegexExtractor.regex">&lt;div class=&quot;article-header&quot;&gt;\s+&lt;a href=&quot;(.+?)&quot;&gt;&lt;h2&gt;(.+?)&lt;\/h2&gt;&lt;\/a&gt;\s+&lt;span class=&quot;meta-top&quot;&gt;\s+&lt;span class=&quot;realigntitle&quot;&gt; - (.+?), (.+?)&lt;\/span&gt;\s+&lt;\/span&gt;\s+\n\s+&lt;\/div&gt;</stringProp>
+            <stringProp name="RegexExtractor.template">$3$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
           </RegexExtractor>
           <hashTree/>
         </hashTree>
@@ -233,7 +242,7 @@
                 </elementProp>
                 <elementProp name="city" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">Cluj-Napoca</stringProp>
+                  <stringProp name="Argument.value">${city}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">city</stringProp>
@@ -268,7 +277,18 @@
             <stringProp name="HTTPSampler.connect_timeout"></stringProp>
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
           </HTTPSamplerProxy>
-          <hashTree/>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">String city = vars.get(&quot;city&quot;);
+if (city==&quot;Cluj&quot;){city=&quot;Cluj-Napoca&quot;;}
+vars.put(&quot;city&quot;,city);</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+          </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOLR Add  Jobs" enabled="true">
             <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -281,7 +301,7 @@
         &quot;job_link&quot;:&quot;${__V(link_${i},)}&quot;,&#xd;
         &quot;company&quot;:&quot;${company}&quot;,&#xd;
         &quot;country&quot;:&quot;${country}&quot;,&#xd;
-        &quot;city&quot;:&quot;Cluj-Napoca&quot;&#xd;
+        &quot;city&quot;:&quot;${city}&quot;&#xd;
        &#xd;
       }]</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan orange" enabled="true">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="career_lidl" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
@@ -10,7 +10,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="company" elementType="Argument">
             <stringProp name="Argument.name">company</stringProp>
-            <stringProp name="Argument.value">Orange</stringProp>
+            <stringProp name="Argument.value">Lidl</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="country" elementType="Argument">
@@ -20,7 +20,7 @@
           </elementProp>
           <elementProp name="career_link" elementType="Argument">
             <stringProp name="Argument.name">career_link</stringProp>
-            <stringProp name="Argument.value">https://www.orange.ro/jobs/</stringProp>
+            <stringProp name="Argument.value">https://cariere.lidl.ro/cautare-joburi2?query=&amp;radius=25&amp;filter={%22employment_area%22:[4]}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -42,7 +42,7 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Delete  Jobs ${company}" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Delete jobs - ${company}" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="action" elementType="HTTPArgument">
@@ -76,7 +76,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOLR Delete ${company} Jobs" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Delete  Jobs" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -153,15 +153,37 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://www.orange.ro/jobs/" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://cariere.lidl.ro/cautare-joburi2?query=&amp;radius=25" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="query" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value"></stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">query</stringProp>
+              </elementProp>
+              <elementProp name="radius" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">25</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">radius</stringProp>
+              </elementProp>
+              <elementProp name="page" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">1</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">page</stringProp>
+              </elementProp>
+            </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.domain">cariere.lidl.ro</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">https://www.orange.ro/ux-admin/api/jobs/getJobs</stringProp>
+          <stringProp name="HTTPSampler.path">/search_api/jobsearch?query=&amp;radius=25&amp;with_event=true</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -174,132 +196,219 @@
         <hashTree>
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
             <collectionProp name="HeaderManager.headers">
+              <elementProp name="accept" elementType="Header">
+                <stringProp name="Header.name">accept</stringProp>
+                <stringProp name="Header.value">*/*</stringProp>
+              </elementProp>
+              <elementProp name="accept-encoding" elementType="Header">
+                <stringProp name="Header.name">accept-encoding</stringProp>
+                <stringProp name="Header.value">gzip, deflate, br</stringProp>
+              </elementProp>
+              <elementProp name="accept-language" elementType="Header">
+                <stringProp name="Header.name">accept-language</stringProp>
+                <stringProp name="Header.value">en-US,en;q=0.9,ro-RO;q=0.8,ro;q=0.7</stringProp>
+              </elementProp>
+              <elementProp name="cookie" elementType="Header">
+                <stringProp name="Header.name">cookie</stringProp>
+                <stringProp name="Header.value">_ga=GA1.2.1736202487.1619960414; _gid=GA1.2.712505017.1619960414; _gac_UA-66134079-25=1.1619960445.CjwKCAjwm7mEBhBsEiwA_of-TMkQxjjgQm1_aRzpY22EXleAV2YFpa54Pq0UUmCWn0VkM8zc7Gd8PRoCBOUQAvD_BwE; CookieConsent={stamp:%27F/pS8i58PvE788oCTcWGB5h8IcNnYnYATZEOKN0D/io67ZqJT/V8Qw==%27%2Cnecessary:true%2Cpreferences:true%2Cstatistics:true%2Cmarketing:true%2Cver:1%2Cutc:1619960449158%2Cregion:%27ro%27}; dt_sc=fgzuqre1hmyecyp00xvt1rnr%7C1619960451782; dtou=532EBF05D1E6EA55A3C282A0998EC507</stringProp>
+              </elementProp>
+              <elementProp name="referer" elementType="Header">
+                <stringProp name="Header.name">referer</stringProp>
+                <stringProp name="Header.value">https://cariere.lidl.ro/cautare-joburi2?query=&amp;radius=25</stringProp>
+              </elementProp>
               <elementProp name="sec-ch-ua" elementType="Header">
                 <stringProp name="Header.name">sec-ch-ua</stringProp>
                 <stringProp name="Header.value">&quot; Not A;Brand&quot;;v=&quot;99&quot;, &quot;Chromium&quot;;v=&quot;90&quot;, &quot;Google Chrome&quot;;v=&quot;90&quot;</stringProp>
-              </elementProp>
-              <elementProp name="Accept" elementType="Header">
-                <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
-              </elementProp>
-              <elementProp name="X-Requested-With" elementType="Header">
-                <stringProp name="Header.name">X-Requested-With</stringProp>
-                <stringProp name="Header.value">XMLHttpRequest</stringProp>
               </elementProp>
               <elementProp name="sec-ch-ua-mobile" elementType="Header">
                 <stringProp name="Header.name">sec-ch-ua-mobile</stringProp>
                 <stringProp name="Header.value">?0</stringProp>
               </elementProp>
-              <elementProp name="User-Agent" elementType="Header">
-                <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36</stringProp>
-              </elementProp>
-              <elementProp name="Content-Type" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json; charset=utf-8</stringProp>
-              </elementProp>
-              <elementProp name="Sec-Fetch-Site" elementType="Header">
-                <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
-                <stringProp name="Header.value">same-origin</stringProp>
-              </elementProp>
-              <elementProp name="Sec-Fetch-Mode" elementType="Header">
-                <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
-                <stringProp name="Header.value">cors</stringProp>
-              </elementProp>
-              <elementProp name="Sec-Fetch-Dest" elementType="Header">
-                <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
+              <elementProp name="sec-fetch-dest" elementType="Header">
+                <stringProp name="Header.name">sec-fetch-dest</stringProp>
                 <stringProp name="Header.value">empty</stringProp>
               </elementProp>
-              <elementProp name="Referer" elementType="Header">
-                <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">https://www.orange.ro/jobs/joburi-disponibile</stringProp>
+              <elementProp name="sec-fetch-mode" elementType="Header">
+                <stringProp name="Header.name">sec-fetch-mode</stringProp>
+                <stringProp name="Header.value">cors</stringProp>
               </elementProp>
-              <elementProp name="Accept-Encoding" elementType="Header">
-                <stringProp name="Header.name">Accept-Encoding</stringProp>
-                <stringProp name="Header.value">gzip, deflate, br</stringProp>
+              <elementProp name="sec-fetch-site" elementType="Header">
+                <stringProp name="Header.name">sec-fetch-site</stringProp>
+                <stringProp name="Header.value">same-origin</stringProp>
               </elementProp>
-              <elementProp name="Accept-Language" elementType="Header">
-                <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-US,en;q=0.9,ro-RO;q=0.8,ro;q=0.7</stringProp>
-              </elementProp>
-              <elementProp name="Cookie" elementType="Header">
-                <stringProp name="Header.name">Cookie</stringProp>
-                <stringProp name="Header.value">BIGipServerRancherProd-Online2-External_40net_pool=rd5o00000000000000000000ffffac123213o8081; ci_session=a1b3fcf6a60542ffe725be7608ab7646f32e3806; _ga=GA1.2.1046748490.1615296232; utmz=CjwKCAjwpKCDBhBPEiwAFgBzj7JwOcSboCegk3eny7T9aNMwtMf1UA4xxyF4vDqhzJKkGsKw6wSgLhoC7eYQAvD_BwE%7Cadwords%7Cpaid; WT_FPC=id=267cae93985e795227f1617451738290:lv=1617451738290:ss=1617451738290; _gac_UA-542258-1=1.1617462539.CjwKCAjwpKCDBhBPEiwAFgBzj7JwOcSboCegk3eny7T9aNMwtMf1UA4xxyF4vDqhzJKkGsKw6wSgLhoC7eYQAvD_BwE; BIGipServerstatic_40net_pool=rd5o00000000000000000000ffffac123122o80; BIGipServerwebshop_liferay6_40net=rd5o00000000000000000000ffffac11e41fo9080; WEBSHOPPORTLETSESSID=C6CwgT2QG5thqYl045k1HCsK18pKpJhmV5pqJhMDLkyjsnSb0sxq!-211767459; _gid=GA1.2.1440371210.1619949235; BIGipServerRancherProd-Online-External_40net_pool=rd5o00000000000000000000ffffac1230b2o8081; _gcl_au=1.1.771318603.1619949238; OptanonAlertBoxClosed=2021-05-02T09:53:58.635Z; _hjTLDTest=1; _hjid=8363ce99-ca5b-4258-9220-9fe80c47c6a2; _fbp=fb.1.1619949239045.517369048; dtCookie=v_4_srv_12_sn_DB205BCF52176AEC91611CBECB4F2168_perc_100000_ol_0_mul_1_app-3A1a0261f3cf515b44_1; _hjAbsoluteSessionInProgress=1; mktz_sess=sess.2.1448359425.1619949476268; mktz_client=%7B%22is_returning%22%3A0%2C%22uid%22%3A%227360843211807655540%22%2C%22session%22%3A%22sess.2.1448359425.1619949476268%22%2C%22views%22%3A1%2C%22referer_url%22%3A%22%22%2C%22referer_domain%22%3A%22%22%2C%22referer_type%22%3A%22direct%22%2C%22visits%22%3A1%2C%22landing%22%3A%22https%3A//www.orange.ro/eroare404.html%2343%3Btyio%3D%22%2C%22enter_at%22%3A%222021-05-2%7C12%3A57%3A56%22%2C%22first_visit%22%3A%222021-05-2%7C12%3A57%3A56%22%2C%22last_visit%22%3A%222021-05-2%7C12%3A57%3A56%22%2C%22last_variation%22%3A%22%22%2C%22utm_source%22%3Afalse%2C%22utm_term%22%3Afalse%2C%22utm_campaign%22%3Afalse%2C%22utm_content%22%3Afalse%2C%22utm_medium%22%3Afalse%2C%22consent%22%3A%22%22%7D; mktz_ab=%7B%7D; OptanonConsent=isIABGlobal=false&amp;datestamp=Sun+May+02+2021+12%3A58%3A34+GMT%2B0300+(Ora+de+var%C4%83+a+Europei+de+Est)&amp;version=6.16.0&amp;landingPath=NotLandingPage&amp;groups=1%3A1%2C2%3A1%2C3%3A1%2C4%3A1%2C0_17350%3A1%2C0_17348%3A1%2C0_17354%3A1%2C0_29217%3A1%2C0_29215%3A1%2C0_17351%3A1%2C0_17349%3A1%2C0_17347%3A1%2C0_29216%3A1%2C0_29214%3A1%2C101%3A1%2C102%3A1%2C103%3A1%2C104%3A1%2C105%3A1%2C106%3A1%2C107%3A1%2C108%3A1%2C109%3A1%2C110%3A1%2C111%3A1%2C112%3A1%2C113%3A1%2C114%3A1%2C115%3A1%2C116%3A1%2C117%3A1&amp;AwaitingReconsent=false&amp;consentId=4678f74d-70ac-45e8-aeea-d410939cc05d; __sreff=1619949239310.1619949514220.9; __reff=[[www.orange.ro/jobs/]](direct)&amp;1619949239310.1619949514220.9; 59544.vst=%7B%22s%22%3A%2299d83f58-92a7-438d-aed9-4ca9c6299380%22%2C%22t%22%3A%22new%22%2C%22lu%22%3A1619949515724%2C%22lv%22%3A1619949260482%2C%22lp%22%3A0%7D</stringProp>
+              <elementProp name="user-agent" elementType="Header">
+                <stringProp name="Header.name">user-agent</stringProp>
+                <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="title" enabled="true">
-            <stringProp name="JMESExtractor.referenceName">title</stringProp>
-            <stringProp name="JMESExtractor.jmesPathExpr">[*].title</stringProp>
-            <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
-          </JMESPathExtractor>
-          <hashTree/>
-          <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="link" enabled="true">
-            <stringProp name="JMESExtractor.referenceName">link</stringProp>
-            <stringProp name="JMESExtractor.jmesPathExpr">[*].url</stringProp>
-            <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
-          </JMESPathExtractor>
-          <hashTree/>
-          <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="cities" enabled="true">
-            <stringProp name="JMESExtractor.referenceName">cities</stringProp>
-            <stringProp name="JMESExtractor.jmesPathExpr">[*].location[*].name</stringProp>
-            <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
+          <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="pages" enabled="true">
+            <stringProp name="JMESExtractor.referenceName">pages</stringProp>
+            <stringProp name="JMESExtractor.jmesPathExpr">result.pageCount</stringProp>
+            <stringProp name="JMESExtractor.matchNumber">1</stringProp>
           </JMESPathExtractor>
           <hashTree/>
         </hashTree>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
-          <boolProp name="displayJMeterProperties">false</boolProp>
-          <boolProp name="displayJMeterVariables">true</boolProp>
-          <boolProp name="displaySystemProperties">false</boolProp>
-        </DebugSampler>
-        <hashTree/>
-        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Controller" enabled="true">
-          <stringProp name="ForeachController.inputVal">title</stringProp>
-          <stringProp name="ForeachController.returnVal">vid</stringProp>
-          <boolProp name="ForeachController.useSeparator">true</boolProp>
-          <stringProp name="ForeachController.startIndex">0</stringProp>
-        </ForeachController>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${pages}</stringProp>
+        </LoopController>
         <hashTree>
-          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="i" enabled="true">
             <stringProp name="CounterConfig.start">1</stringProp>
             <stringProp name="CounterConfig.end"></stringProp>
             <stringProp name="CounterConfig.incr">1</stringProp>
-            <stringProp name="CounterConfig.name">k</stringProp>
+            <stringProp name="CounterConfig.name">i</stringProp>
             <stringProp name="CounterConfig.format"></stringProp>
             <boolProp name="CounterConfig.per_user">false</boolProp>
           </CounterConfig>
           <hashTree/>
-          <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="city_${k}" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://cariere.lidl.ro/cautare-joburi2?query=&amp;radius=25&amp;page=${i}" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="query" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">query</stringProp>
+                </elementProp>
+                <elementProp name="radius" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">25</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">radius</stringProp>
+                </elementProp>
+                <elementProp name="page" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${i}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">page</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">cariere.lidl.ro</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/search_api/jobsearch?query=&amp;radius=25&amp;with_event=true</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="accept" elementType="Header">
+                  <stringProp name="Header.name">accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="accept-encoding" elementType="Header">
+                  <stringProp name="Header.name">accept-encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate, br</stringProp>
+                </elementProp>
+                <elementProp name="accept-language" elementType="Header">
+                  <stringProp name="Header.name">accept-language</stringProp>
+                  <stringProp name="Header.value">en-US,en;q=0.9,ro-RO;q=0.8,ro;q=0.7</stringProp>
+                </elementProp>
+                <elementProp name="cookie" elementType="Header">
+                  <stringProp name="Header.name">cookie</stringProp>
+                  <stringProp name="Header.value">_ga=GA1.2.1736202487.1619960414; _gid=GA1.2.712505017.1619960414; _gac_UA-66134079-25=1.1619960445.CjwKCAjwm7mEBhBsEiwA_of-TMkQxjjgQm1_aRzpY22EXleAV2YFpa54Pq0UUmCWn0VkM8zc7Gd8PRoCBOUQAvD_BwE; CookieConsent={stamp:%27F/pS8i58PvE788oCTcWGB5h8IcNnYnYATZEOKN0D/io67ZqJT/V8Qw==%27%2Cnecessary:true%2Cpreferences:true%2Cstatistics:true%2Cmarketing:true%2Cver:1%2Cutc:1619960449158%2Cregion:%27ro%27}; dt_sc=fgzuqre1hmyecyp00xvt1rnr%7C1619960451782; dtou=532EBF05D1E6EA55A3C282A0998EC507</stringProp>
+                </elementProp>
+                <elementProp name="referer" elementType="Header">
+                  <stringProp name="Header.name">referer</stringProp>
+                  <stringProp name="Header.value">https://cariere.lidl.ro/cautare-joburi2?query=&amp;radius=25</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua</stringProp>
+                  <stringProp name="Header.value">&quot; Not A;Brand&quot;;v=&quot;99&quot;, &quot;Chromium&quot;;v=&quot;90&quot;, &quot;Google Chrome&quot;;v=&quot;90&quot;</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua-mobile" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua-mobile</stringProp>
+                  <stringProp name="Header.value">?0</stringProp>
+                </elementProp>
+                <elementProp name="sec-fetch-dest" elementType="Header">
+                  <stringProp name="Header.name">sec-fetch-dest</stringProp>
+                  <stringProp name="Header.value">empty</stringProp>
+                </elementProp>
+                <elementProp name="sec-fetch-mode" elementType="Header">
+                  <stringProp name="Header.name">sec-fetch-mode</stringProp>
+                  <stringProp name="Header.value">cors</stringProp>
+                </elementProp>
+                <elementProp name="sec-fetch-site" elementType="Header">
+                  <stringProp name="Header.name">sec-fetch-site</stringProp>
+                  <stringProp name="Header.value">same-origin</stringProp>
+                </elementProp>
+                <elementProp name="user-agent" elementType="Header">
+                  <stringProp name="Header.name">user-agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="title" enabled="true">
+              <stringProp name="JMESExtractor.referenceName">title</stringProp>
+              <stringProp name="JMESExtractor.jmesPathExpr">result.hits[*].title</stringProp>
+              <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
+            </JMESPathExtractor>
+            <hashTree/>
+            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="link" enabled="true">
+              <stringProp name="JMESExtractor.referenceName">link</stringProp>
+              <stringProp name="JMESExtractor.jmesPathExpr">result.hits[*].url</stringProp>
+              <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
+            </JMESPathExtractor>
+            <hashTree/>
+            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="city" enabled="true">
+              <stringProp name="JMESExtractor.referenceName">city</stringProp>
+              <stringProp name="JMESExtractor.jmesPathExpr">result.hits[*].location.city</stringProp>
+              <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
+            </JMESPathExtractor>
+            <hashTree/>
+          </hashTree>
+          <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="jp@gc - Dummy Sampler" enabled="true">
             <boolProp name="WAITING">false</boolProp>
             <boolProp name="SUCCESFULL">true</boolProp>
             <stringProp name="RESPONSE_CODE">200</stringProp>
             <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
-            <stringProp name="REQUEST_DATA">Dummy Sampler used to simulate requests and responses
-without actual network activity. This helps debugging tests.</stringProp>
-            <stringProp name="RESPONSE_DATA">${__V(cities_${k},)}</stringProp>
+            <stringProp name="REQUEST_DATA"></stringProp>
+            <stringProp name="RESPONSE_DATA">${__jexl3(0,k)}</stringProp>
             <stringProp name="RESPONSE_TIME">0</stringProp>
             <stringProp name="LATENCY">0</stringProp>
             <stringProp name="CONNECT">0</stringProp>
             <stringProp name="URL"></stringProp>
             <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
           </kg.apc.jmeter.samplers.DummySampler>
-          <hashTree>
-            <JMESPathExtractor guiclass="JMESPathExtractorGui" testclass="JMESPathExtractor" testname="city" enabled="true">
-              <stringProp name="JMESExtractor.referenceName">city</stringProp>
-              <stringProp name="JMESExtractor.jmesPathExpr">[*]</stringProp>
-              <stringProp name="JMESExtractor.matchNumber">-1</stringProp>
-            </JMESPathExtractor>
-            <hashTree/>
-          </hashTree>
+          <hashTree/>
           <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Controller" enabled="true">
-            <stringProp name="ForeachController.inputVal">city</stringProp>
-            <stringProp name="ForeachController.returnVal">town</stringProp>
+            <stringProp name="ForeachController.inputVal">title</stringProp>
+            <stringProp name="ForeachController.returnVal">job</stringProp>
             <boolProp name="ForeachController.useSeparator">true</boolProp>
             <stringProp name="ForeachController.startIndex">0</stringProp>
           </ForeachController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${k} --  add --  ${__V(title_${k},)}" enabled="true">
+            <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="counter" enabled="true">
+              <boolProp name="WAITING">false</boolProp>
+              <boolProp name="SUCCESFULL">true</boolProp>
+              <stringProp name="RESPONSE_CODE">200</stringProp>
+              <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+              <stringProp name="REQUEST_DATA"></stringProp>
+              <stringProp name="RESPONSE_DATA">${__jexl3(${k}+1,k)}</stringProp>
+              <stringProp name="RESPONSE_TIME">0</stringProp>
+              <stringProp name="LATENCY">0</stringProp>
+              <stringProp name="CONNECT">0</stringProp>
+              <stringProp name="URL"></stringProp>
+              <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+            </kg.apc.jmeter.samplers.DummySampler>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="addjobs - ${__V(title_${k},)}" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="company" elementType="HTTPArgument">
@@ -310,25 +419,11 @@ without actual network activity. This helps debugging tests.</stringProp>
                     <stringProp name="Argument.name">company</stringProp>
                   </elementProp>
                   <elementProp name="title" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.value">${__V(title_${k},)}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">title</stringProp>
-                  </elementProp>
-                  <elementProp name="city" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">${town}</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                    <stringProp name="Argument.name">city</stringProp>
-                  </elementProp>
-                  <elementProp name="link" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">${__V(link_${k},)}</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                    <stringProp name="Argument.name">link</stringProp>
                   </elementProp>
                   <elementProp name="country" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -336,6 +431,20 @@ without actual network activity. This helps debugging tests.</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">country</stringProp>
+                  </elementProp>
+                  <elementProp name="city" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${__V(city_${k},)}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">city</stringProp>
+                  </elementProp>
+                  <elementProp name="link" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">https://cariere.lidl.ro${__V(link_${k},)}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">link</stringProp>
                   </elementProp>
                   <elementProp name="action" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -361,7 +470,7 @@ without actual network activity. This helps debugging tests.</stringProp>
               <stringProp name="HTTPSampler.response_timeout"></stringProp>
             </HTTPSamplerProxy>
             <hashTree/>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOLR Add  Jobs" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Add  Jobs" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -370,10 +479,10 @@ without actual network activity. This helps debugging tests.</stringProp>
                     <stringProp name="Argument.value">[{&#xd;
         &quot;id&quot;:&quot;${__UUID}&quot;,&#xd;
         &quot;job_title&quot;:&quot;${__V(title_${k},)}&quot;,&#xd;
-        &quot;job_link&quot;:&quot;${__V(link_${k},)}&quot;,&#xd;
+        &quot;job_link&quot;:&quot;https://cariere.lidl.ro${__V(link_${k},)}&quot;,&#xd;
         &quot;company&quot;:&quot;${company}&quot;,&#xd;
         &quot;country&quot;:&quot;${country}&quot;,&#xd;
-        &quot;city&quot;:&quot;${town}&quot;&#xd;
+        &quot;city&quot;:&quot;${__V(city_${k},)}&quot;&#xd;
        &#xd;
       }]</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
@@ -399,7 +508,7 @@ without actual network activity. This helps debugging tests.</stringProp>
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="Content-type" elementType="Header">
                     <stringProp name="Header.name">Content-type</stringProp>
-                    <stringProp name="Header.value">application/json</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
                   </elementProp>
                 </collectionProp>
               </HeaderManager>
@@ -407,6 +516,12 @@ without actual network activity. This helps debugging tests.</stringProp>
             </hashTree>
           </hashTree>
         </hashTree>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
