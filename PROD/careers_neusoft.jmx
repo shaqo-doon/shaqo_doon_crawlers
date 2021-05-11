@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="careers_neusoft" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -93,7 +93,7 @@
             </collectionProp>
           </elementProp>
           <stringProp name="HTTPSampler.domain">zimbor.go.ro</stringProp>
-          <stringProp name="HTTPSampler.port">8983</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json</stringProp>
@@ -294,7 +294,7 @@
               </collectionProp>
             </elementProp>
             <stringProp name="HTTPSampler.domain">zimbor.go.ro</stringProp>
-            <stringProp name="HTTPSampler.port">8983</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
             <stringProp name="HTTPSampler.path">/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json</stringProp>
